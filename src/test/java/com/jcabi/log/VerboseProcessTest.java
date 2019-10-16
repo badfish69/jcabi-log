@@ -29,7 +29,6 @@
  */
 package com.jcabi.log;
 
-import com.jcabi.aspects.Tv;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -340,7 +339,7 @@ public final class VerboseProcessTest {
     @Test
     public void terminatesMonitorsAndProcessIfClosedShortly()
         throws Exception {
-        this.terminatesMonitorsAndProcessIfClosed(Tv.FIFTY);
+        this.terminatesMonitorsAndProcessIfClosed(50);
     }
 
     /**
@@ -410,7 +409,7 @@ public final class VerboseProcessTest {
             );
         }
         process.stdoutQuietly();
-        TimeUnit.MILLISECONDS.sleep(Tv.THOUSAND);
+        TimeUnit.MILLISECONDS.sleep(1000);
         Mockito.verify(
             prc,
             Mockito.atLeastOnce()

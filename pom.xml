@@ -30,44 +30,44 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.jcabi</groupId>
-    <artifactId>jcabi</artifactId>
-    <version>1.24</version>
-  </parent>
+  <groupId>com.idslns</groupId>
   <artifactId>jcabi-log</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
   <name>jcabi-log</name>
   <packaging>bundle</packaging>
   <description>Wrapper of SLF4J and a few supplementary logging classes</description>
-  <issueManagement>
-    <system>github</system>
-    <url>https://github.com/jcabi/jcabi-log/issues</url>
-  </issueManagement>
-  <ciManagement>
-    <system>travis</system>
-    <url>https://travis-ci.org/jcabi/jcabi-log</url>
-  </ciManagement>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
   <scm>
-    <connection>scm:git:github.com:jcabi/jcabi-log.git</connection>
-    <developerConnection>scm:git:github.com:jcabi/jcabi-log.git</developerConnection>
-    <url>https://github.com/jcabi/jcabi-log</url>
+    <connection>scm:git:github.com:badfish69/jcabi-log.git</connection>
+    <developerConnection>scm:git:github.com:badfish69/jcabi-log.git</developerConnection>
+    <url>https://github.com/badfish69/jcabi-log</url>
   </scm>
   <distributionManagement>
-    <site>
-      <id>github-pages</id>
-      <url>http://log.jcabi.com/</url>
-    </site>
+    <repository>
+      <id>nexus</id>
+      <name>Releases</name>
+      <url>https://nexus.mel.int/repository/maven-releases/</url>
+    </repository>
+    <snapshotRepository>
+      <id>nexus</id>
+      <name>Snapshot</name>
+      <url>https://nexus.mel.int/repository/maven-snapshots/</url>
+    </snapshotRepository>
   </distributionManagement>
   <dependencies>
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
+      <version>1.16.10</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <!-- for MulticolorLayout -->
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
+      <version>1.2.17</version>
       <scope>compile</scope>
       <optional>true</optional>
     </dependency>
@@ -79,21 +79,43 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
       -->
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
-      <version>1.7.21</version>
-    </dependency>
-    <dependency>
-      <groupId>com.jcabi</groupId>
-      <artifactId>jcabi-aspects</artifactId>
-      <exclusions>
-        <exclusion>
-          <groupId>com.jcabi</groupId>
-          <artifactId>jcabi-log</artifactId>
-        </exclusion>
-      </exclusions>
+      <version>1.7.28</version>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
+      <version>3.5</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- Junit/Mockito for testing -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-core</artifactId>
+      <version>2.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-library</artifactId>
+      <version>2.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>3.1.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>1.7.28</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -101,6 +123,7 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
     <plugins>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.19.1</version>
         <configuration>
           <systemPropertyVariables>
             <file.encoding>Cp1251</file.encoding>
@@ -118,6 +141,7 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
       <plugins>
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.6.0</version>
           <configuration>
             <source>1.8</source>
             <target>1.8</target>
@@ -130,22 +154,4 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
       </plugins>
     </pluginManagement>
   </build>
-  <profiles>
-    <profile>
-      <id>qulice</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>com.qulice</groupId>
-            <artifactId>qulice-maven-plugin</artifactId>
-            <configuration>
-              <excludes combine.children="append">
-                <exclude>findbugs:.*</exclude>
-              </excludes>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
 </project>
